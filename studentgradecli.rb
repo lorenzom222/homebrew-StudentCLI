@@ -2,13 +2,13 @@
 #                https://rubydoc.brew.sh/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
 class Studentgradecli < Formula
-  desc ""
-  homepage ""
+  desc "Student grade management tool for TAs "
+  homepage "https://github.com/lorenzom222/StudentCLI"
   url "https://github.com/lorenzom222/StudentCLI/archive/refs/tags/v1.0.0.tar.gz"
   sha256 "738674afd67dbe56742ea1a163564fdb7fa49dbd06b9b1a42b1dac4c0b2cb669"
   license ""
 
-  # depends_on "cmake" => :build
+  depends_on "readline"
 
   def install
     # ENV.deparallelize  # if your formula fails when building in parallel
@@ -16,6 +16,21 @@ class Studentgradecli < Formula
     # https://rubydoc.brew.sh/Formula.html#std_configure_args-instance_method
     system "./configure", *std_configure_args, "--disable-silent-rules"
     # system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    files = [
+      # ".vscode",
+      "testCases",
+      ".gitignore",
+      "README.md",
+      "grader.sh",
+      "multi-grader.sh",
+      "requirements.txt",
+      "stugrad",
+      "stugrad.cpp"
+    ]
+  
+    files.each do |f|
+      bin.install f
+    end
   end
 
   test do
